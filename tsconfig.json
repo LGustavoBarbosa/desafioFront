@@ -19,7 +19,7 @@
     "types": ["node", "jest"],
     "outDir": "./dist",
     "rootDir": "./src",
-    "noEmit": true
+    "noEmit": false
   },
   "include": ["src", "theme.ts"],
   "exclude": ["node_modules", "dist"]

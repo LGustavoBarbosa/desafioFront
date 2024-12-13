@@ -3,9 +3,11 @@
   "version": "1.0.1",
   "type": "module",
   "scripts": {
+    "install": "npm install --legacy-peer-deps --force",
     "dev": "vite",
     "build": "vite build",
-    "deploy-prod": "vite build && firebase deploy",
+    "deploy-prod-firebase": "vite build && firebase deploy",
+    "deploy-prod-vercel": "vite build && vercel --prod",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "npx jest"
   },
