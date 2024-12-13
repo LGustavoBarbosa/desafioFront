@@ -5,7 +5,7 @@ export type ChatMessage = {
   role: "system" | "user" | "assistant";
   content: string;
 };
-const apiKey = import.meta?.env?.VITE_OPENAI_API_KEY || "";
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 export async function getChatCompletion(
   messages: ChatMessage[]

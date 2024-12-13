@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { useChat } from "views/chat/hooks/useChat.hook";
 import ChatWindow from "views/chat/components/Window";
 import ChatInput from "views/chat/components/Input";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const ChatPage: React.FC = () => {
   const {
@@ -42,14 +43,21 @@ const ChatPage: React.FC = () => {
   );
 
   return (
-    <Box
-      test-id="app"
-      id="app"
-      sx={{ p: 4, display: "flex", flexDirection: "column", height: "100vh" }}
+    <Grid2
+      container
+      direction="column"
+      sx={{ height: "100vh" }}
+      spacing={1}
+      pl={2}
+      pr={2}
     >
-      <Box sx={{ flex: 1 }}>{ChatWindowMemo}</Box>
-      <Box sx={{ flex: 0 }}>{ChatInputMemo}</Box>
-    </Box>
+      <Grid2 id="chat-window" className="chat-window" sx={{ flex: 1 }} xs={12}>
+        {ChatWindowMemo}
+      </Grid2>
+      <Grid2 sx={{ flex: 0 }} xs={12}>
+        {ChatInputMemo}
+      </Grid2>
+    </Grid2>
   );
 };
 
