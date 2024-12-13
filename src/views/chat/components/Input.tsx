@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, IconButton } from "@mui/material";
+import { TextField, IconButton, CircularProgress } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import { Send as SendIcon, HelpOutline as HelpIcon } from "@mui/icons-material";
 
@@ -49,13 +49,18 @@ const Input: React.FC<InputProps> = ({
               backgroundColor: "#ffffff",
             },
           }}
-          onClick={onHelp}
+          onClick={!loading ? onHelp : () => {}}
         >
-          <HelpIcon />
+          {loading ? (
+            <CircularProgress size={18} color="secondary" />
+          ) : (
+            <HelpIcon />
+          )}
         </IconButton>
       </Grid2>
       <Grid2 flex={11.1}>
         <TextField
+          multiline
           type="text"
           variant="standard"
           fullWidth
@@ -68,8 +73,7 @@ const Input: React.FC<InputProps> = ({
       </Grid2>
       <Grid2 flex={0.3} sx={{ flex: "0 1 60px" }}>
         <IconButton
-          onClick={onSend}
-          disabled={loading}
+          onClick={!loading ? onSend : () => {}}
           sx={{
             color: "#000000",
             backgroundColor: "#ffffff",
@@ -79,7 +83,11 @@ const Input: React.FC<InputProps> = ({
             },
           }}
         >
-          <SendIcon />
+          {loading ? (
+            <CircularProgress size={18} color="secondary" />
+          ) : (
+            <SendIcon />
+          )}
         </IconButton>
       </Grid2>
     </Grid2>

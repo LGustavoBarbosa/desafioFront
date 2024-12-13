@@ -44,12 +44,20 @@ const ChatPage: React.FC = () => {
 
   return (
     <Grid2
+      id="chat-page"
       container
       direction="column"
-      sx={{ height: "100vh" }}
+      sx={{
+        height: "100vh",
+        overflowY: "hidden",
+        overflowX: "hidden",
+        width: "100%",
+      }}
       spacing={1}
       pl={2}
       pr={2}
+      pb={2}
+      pt={2}
     >
       <Grid2 id="chat-window" className="chat-window" sx={{ flex: 1 }} xs={12}>
         {ChatWindowMemo}

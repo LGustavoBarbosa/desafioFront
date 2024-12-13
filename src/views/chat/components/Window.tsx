@@ -14,15 +14,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
   loading,
   loadingText,
 }) => {
-  return (
-    <Grid2 container direction="column" wrap="nowrap" spacing={2} p={2}>
-      {messages.map((msg) => (
-        <Grid2 key={msg.id} xs={12}>
-          <Message message={msg} loading={loading} loadingText={loadingText} />
-        </Grid2>
-      ))}
+  return messages.map((msg) => (
+    <Grid2 key={msg.id} xs={12}>
+      <Message message={msg} loading={loading} loadingText={loadingText} />
     </Grid2>
-  );
+  ));
 };
 
 export default ChatWindow;

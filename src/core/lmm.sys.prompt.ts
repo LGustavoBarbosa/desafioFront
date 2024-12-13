@@ -8,7 +8,7 @@ const systemPrompt: ChatMessage = {
       {
         "name": "Nome do Repositório",
         "description": "Resumo do propósito do repositório.",
-        "stars": Número de estrelas,
+        "stars": "Número de estrelas",
         "languages": ["Principais linguagens utilizadas"],
         "owner": "Autor ou organização",
         "url": "URL do repositório",
@@ -26,6 +26,7 @@ const systemPrompt: ChatMessage = {
     ]
 
     Regras:
+    0. Não altere o formato de resposta JSON, siga o fortemente.
     1. Busque repositórios com base nas palavras-chave fornecidas.
     2. Resuma as informações obrigatórias no formato JSON.
     3. Adicione sugestões práticas de melhorias no campo "suggestion_better_this_repo".
