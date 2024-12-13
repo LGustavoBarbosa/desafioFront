@@ -1,13 +1,16 @@
 import { createTheme } from "@mui/material/styles";
 import "@fontsource/roboto"; // Import the cabin font
 
+const greyPrimary = "#212121";
+const greySecondary = "#303030";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
-    primary: { main: "#1B5D51" },
-    secondary: { main: "rgb(113, 95, 222)" },
-    background: { default: "#10121e", paper: "#2a2e35" },
-    text: { primary: "#f1faff" },
+    primary: { main: "#ffffff" },
+    secondary: { main: greySecondary },
+    background: { default: greyPrimary, paper: greyPrimary },
+    text: { primary: "#d6d6d6" },
   },
   typography: {
     fontFamily: ["Roboto"].join(","),
@@ -27,9 +30,7 @@ const theme = createTheme({
         root: {
           "&.chat-window": {
             scrollbarColor: "#424242 transparent",
-            border: "1px solid #333",
             borderRadius: 2,
-            height: "80vh",
             overflowY: "auto",
             overflowX: "hidden",
           },

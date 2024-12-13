@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { MessageEntity } from "../../domain/entities/MessageEntity";
+import { MessageEntity } from "domain/entities/MessageEntity";
 // import { GitHubRepository } from "../../domain/repositories/GitHubRepository";
-import { OpenAIRepository } from "../../domain/repositories/OpenAIRepository";
+import { OpenAIRepository } from "domain/repositories/OpenAIRepository";
 import { SuggestionsEntity } from "domain/entities/SuggestionsEntity";
 import { bootChatPrompt } from "core/boot.chat.prompt";
 
@@ -67,9 +67,13 @@ export function useChat(): ChatHook {
   const scrollBottom = useCallback(() => {
     const chatContainer = document.getElementById("chat-window");
     if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+      window.scrollTo(0, chatContainer.scrollHeight);
     }
   }, []);
+
+  useEffect(() => {
+    scrollBottom();
+  }, [messages, scrollBottom]);
 
   const handleSendMessage = useCallback(async () => {
     try {

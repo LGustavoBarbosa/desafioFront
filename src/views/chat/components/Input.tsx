@@ -33,16 +33,32 @@ const Input: React.FC<InputProps> = ({
       spacing={2}
       alignItems="center"
       alignContent="center"
+      sx={{
+        height: "96px",
+        borderRadius: "1.5rem",
+        backgroundColor: "#2f2f2f",
+      }}
     >
       <Grid2 sx={{ flex: "0 1 62px" }}>
-        <IconButton disabled={loading} color="secondary" onClick={onHelp}>
+        <IconButton
+          sx={{
+            color: "#000000",
+            backgroundColor: "#ffffff",
+            borderRadius: "50%",
+            "&:hover": {
+              backgroundColor: "#ffffff",
+            },
+          }}
+          onClick={onHelp}
+        >
           <HelpIcon />
         </IconButton>
       </Grid2>
       <Grid2 flex={11.1}>
         <TextField
+          type="text"
+          variant="standard"
           fullWidth
-          variant="outlined"
           placeholder="Digite sua mensagem..."
           value={inputValue}
           onChange={onChange}
@@ -53,6 +69,7 @@ const Input: React.FC<InputProps> = ({
       <Grid2 flex={0.3} sx={{ flex: "0 1 60px" }}>
         <IconButton
           onClick={onSend}
+          disabled={loading}
           sx={{
             color: "#000000",
             backgroundColor: "#ffffff",

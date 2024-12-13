@@ -1,11 +1,11 @@
 import axios from "axios";
-import { OPENAI_API_KEY } from "../config/env";
 import { modelName } from "core/lmm.sys.prompt";
 
 export type ChatMessage = {
   role: "system" | "user" | "assistant";
   content: string;
 };
+const apiKey = process.env.VITE_OPENAI_API_KEY || "";
 
 export async function getChatCompletion(
   messages: ChatMessage[]
@@ -18,7 +18,7 @@ export async function getChatCompletion(
     },
     {
       headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { MessageEntity } from "../../domain/entities/MessageEntity";
+import { MessageEntity } from "../../../domain/entities/MessageEntity";
 import Message from "./Message";
 import Grid2 from "@mui/material/Unstable_Grid2";
 

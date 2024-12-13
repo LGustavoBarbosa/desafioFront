@@ -1,14 +1,10 @@
 import {
-  Box,
   Card,
   CardContent,
   Typography,
   Stack,
   Chip,
   Link,
-  List,
-  ListItem,
-  ListItemText,
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import CodeIcon from "@mui/icons-material/Code";
@@ -56,11 +52,10 @@ export const Suggestion: React.FC<SuggestionProps> = ({ suggestion }) => {
               </Stack>
             </Typography>
           </Grid2>
-
           <Grid2 xs={12}>
             <Typography variant="subtitle1">
               <strong>Link:</strong>{" "}
-              <Link href={suggestion.url} target="_blank" color="primary.main">
+              <Link href={suggestion.url} target="_blank" color="#7ab7ff">
                 {suggestion.url}
               </Link>
             </Typography>
@@ -101,7 +96,13 @@ export const Suggestion: React.FC<SuggestionProps> = ({ suggestion }) => {
           <Grid2 xs={12}>
             <Grid2 container direction="column" spacing={2} flexWrap="nowrap">
               {suggestion.llm.map((item, index) => (
-                <Grid2 container spacing={2} key={index}>
+                <Grid2
+                  container
+                  spacing={2}
+                  key={index}
+                  flexWrap="nowrap"
+                  direction="column"
+                >
                   <Grid2 xs={12}>
                     <Grid2 container direction="column" spacing={2}>
                       <Grid2>
@@ -117,7 +118,12 @@ export const Suggestion: React.FC<SuggestionProps> = ({ suggestion }) => {
                     </Grid2>
                   </Grid2>
                   <Grid2 xs={12}>
-                    <Grid2 container direction="column" spacing={2}>
+                    <Grid2
+                      container
+                      direction="column"
+                      spacing={2}
+                      flexWrap="nowrap"
+                    >
                       <Grid2>
                         <Typography variant="subtitle1" gutterBottom>
                           <b>Aplicação no Mundo Real:</b>
@@ -130,7 +136,6 @@ export const Suggestion: React.FC<SuggestionProps> = ({ suggestion }) => {
                       </Grid2>
                     </Grid2>
                   </Grid2>
-
                   <Grid2 xs={12}>
                     <Grid2
                       container
@@ -140,17 +145,30 @@ export const Suggestion: React.FC<SuggestionProps> = ({ suggestion }) => {
                     >
                       <Grid2>
                         <Typography variant="subtitle1" gutterBottom>
-                          <strong>Exemplo de Código:</strong>
+                          <strong>
+                            Sugestão de contribuição na comunidade:
+                          </strong>
                         </Typography>
                       </Grid2>
-                      <Grid2 pl={2}>
-                        <Typography
-                          variant="body2"
-                          component="pre"
-                          sx={{ whiteSpace: "pre-wrap" }}
+                      <Grid2
+                        pl={2}
+                        bgcolor={"#0d0d0d"}
+                        p={2}
+                        borderRadius={2}
+                        xs={12}
+                      >
+                        <code
+                          style={{
+                            whiteSpace: "pre-wrap",
+                            wordWrap: "break-word",
+                            color: "#fff",
+                            textAlign: "left",
+                            backgroundColor: "transparent",
+                            minHeight: "2em",
+                          }}
                         >
-                          <pre>{item.example_code}</pre>
-                        </Typography>
+                          {item.suggestion_better_this_repo}
+                        </code>
                       </Grid2>
                     </Grid2>
                   </Grid2>

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Typography } from "@mui/material";
-import { MessageEntity } from "../../domain/entities/MessageEntity";
+import { MessageEntity } from "../../../domain/entities/MessageEntity";
 import { SuggestionsEntity } from "domain/entities/SuggestionsEntity";
 import { Suggestion } from "./Suggestion";
 import Grid2 from "@mui/material/Unstable_Grid2";
@@ -28,7 +28,7 @@ const Message: React.FC<MessageProps> = ({ message, loading, loadingText }) => {
         };
       case "user":
         return {
-          bgcolor: "primary.main",
+          bgcolor: "secondary.main",
           justifyContent: "flex-end",
           initial: { opacity: 0, x: 50 },
           borderRadius: "20px 20px 0 20px",
@@ -90,7 +90,6 @@ const Message: React.FC<MessageProps> = ({ message, loading, loadingText }) => {
               bgcolor: getSx?.bgcolor,
               borderRadius: getSx?.borderRadius,
               minWidth: "130px",
-              p: 2,
               width: "fit-content",
             }}
           >

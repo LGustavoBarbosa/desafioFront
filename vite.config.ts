@@ -9,7 +9,7 @@ export default defineConfig({
       core: path.resolve(__dirname, "src/core"),
       domain: path.resolve(__dirname, "src/domain"),
       providers: path.resolve(__dirname, "src/providers"),
-      presentation: path.resolve(__dirname, "src/presentation"),
+      views: path.resolve(__dirname, "src/views"),
     },
   },
 });

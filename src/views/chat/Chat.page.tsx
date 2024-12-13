@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { Box } from "@mui/material";
-import { useChat } from "./hooks/useChat.hook";
-import ChatWindow from "./components/Window";
-import ChatInput from "./components/Input";
+import { useChat } from "views/chat/hooks/useChat.hook";
+import ChatWindow from "views/chat/components/Window";
+import ChatInput from "views/chat/components/Input";
 
 const ChatPage: React.FC = () => {
   const {
