@@ -16,19 +16,19 @@ const Message: React.FC<MessageProps> = ({ message, loading, loadingText }) => {
     switch (message.role) {
       case "system":
         return {
-          bgcolor: "secondary.main",
+          bgcolor: "#2c2c2c",
           justifyContent: "flex-start",
           borderRadius: "20px 20px 20px 0",
         };
       case "system.loading":
         return {
-          bgcolor: "secondary.main",
+          bgcolor: "#2c2c2c",
           justifyContent: "flex-start",
           borderRadius: "20px 20px 20px 0",
         };
       case "user":
         return {
-          bgcolor: "secondary.main",
+          bgcolor: "#2c2c2c",
           justifyContent: "flex-end",
           initial: { opacity: 0, x: 50 },
           borderRadius: "20px 20px 0 20px",
