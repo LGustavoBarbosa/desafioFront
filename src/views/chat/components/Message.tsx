@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
 import { Typography } from "@mui/material";
 import { MessageEntity } from "../../../domain/entities/MessageEntity";
-import { SuggestionsEntity } from "domain/entities/SuggestionsEntity";
-import { Suggestion } from "./Suggestion";
 import Grid2 from "@mui/material/Unstable_Grid2";
+import Repository from "./Repostory";
+import { RepositoryEntity } from "domain/entities/RepositoryEntity";
+import GenericErrorBoundary from "errors/GenericErrorBoundary";
 
 interface MessageProps {
   message: MessageEntity;
@@ -42,8 +43,8 @@ const Message: React.FC<MessageProps> = ({ message, loading, loadingText }) => {
     }
   }, [message.role]);
 
-  const SuggestionCardMemo = useMemo(
-    () => <Suggestion suggestion={message.content as SuggestionsEntity} />,
+  const RepositoryCardMemo = useMemo(
+    () => <Repository repository={message.content as RepositoryEntity} />,
     [message.content]
   );
 
@@ -63,7 +64,7 @@ const Message: React.FC<MessageProps> = ({ message, loading, loadingText }) => {
             <Typography>
               {loading && loadingText
                 ? loadingText
-                : message.content.toString()}
+                : message.content.toString() || "Carregado."}
             </Typography>
           </Grid2>
         );
@@ -93,13 +94,13 @@ const Message: React.FC<MessageProps> = ({ message, loading, loadingText }) => {
               width: "fit-content",
             }}
           >
-            {SuggestionCardMemo}
+            {RepositoryCardMemo}
           </Grid2>
         );
     }
-  }, [loadingText, loading, message, SuggestionCardMemo, getSx]);
+  }, [loadingText, loading, message, RepositoryCardMemo, getSx]);
 
-  return <>{ContentControllerMemo}</>;
+  return <GenericErrorBoundary>{ContentControllerMemo}</GenericErrorBoundary>;
 };
 
 export default Message;

@@ -1,6 +1,8 @@
 # GitHub Get Stars
 
-Esta aplicação permite que você obtenha a contagem de estrelas de repositórios no GitHub.
+<!--
+Esta aplicação busca repositórios de usuários no github  e os lista.
+-->
 
 ## Instalação
 
@@ -15,21 +17,6 @@ Esta aplicação permite que você obtenha a contagem de estrelas de repositóri
    ```sh
    npm install --legacy-peer-deps --force
    ```
-
-## Configuração
-
-1. Crie um arquivo `.env` na raiz do projeto e adicione suas chaves de API do GitHub:
-
-   ```plaintext
-   VITE_OPENAI_API_KEY=OPENAI_API_KEY
-   ```
-
-Após fazer login:
-
-1.  Acesse o site da OpenAI: https://platform.openai.com/.
-2.  Clique em Sign up para criar sua conta ou Log in se já tiver uma.
-3.  Vá para o painel em https://platform.openai.com/account/api-keys.
-4.  Aqui você verá a seção para gerenciar suas API keys.
 
 ## Uso
 

@@ -1,13 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { MessageEntity } from "domain/entities/MessageEntity";
-// import { GitHubRepository } from "../../domain/repositories/GitHubRepository";
-import { OpenAIRepository } from "domain/repositories/OpenAIRepository";
-import { SuggestionsEntity } from "domain/entities/SuggestionsEntity";
-import { bootChatPrompt } from "core/boot.chat.prompt";
+import { GitHubRepository } from "domain/repositories/GitHubRepository";
+import { RepositoryEntity } from "domain/entities/RepositoryEntity";
 
-// const gitHubRepo = new GitHubRepository();
-const openAIRepo = new OpenAIRepository();
+const gitHubRepo = new GitHubRepository();
 
 export interface ChatHook {
   messages: MessageEntity[];
@@ -41,39 +38,50 @@ export function useChat(): ChatHook {
         }
         return prev + ".";
       });
+      const assistantThinking = new MessageEntity({
+        id: uuid(),
+        role: "system.loading",
+        content: loadingText,
+        loadingText: loadingText,
+      });
+      setMessages((prev) => [...prev, assistantThinking]);
     }, 600);
-    const assistantThinking = new MessageEntity({
-      id: uuid(),
-      role: "system.loading",
-      content: loadingText,
-      loadingText: loadingText,
-    });
-    setMessages((prev) => [...prev, assistantThinking]);
-  }, [loadingText]);
+  }, []);
 
-  const showBounceMessages = useCallback((suggestions: SuggestionsEntity[]) => {
-    for (const suggestion of suggestions) {
+  const showBounceMessages = useCallback((messages: MessageEntity[]) => {
+    for (const message of messages) {
       setTimeout(() => {
-        const suggestionsEntity = new MessageEntity({
-          id: uuid(),
-          role: "assistant",
-          content: suggestion,
-        });
-        setMessages((prev) => [...prev, suggestionsEntity]);
+        setMessages((prev) => [...prev, message]);
+        scrollBottom();
       }, 600);
     }
   }, []);
 
   const scrollBottom = useCallback(() => {
-    const chatContainer = document.getElementById("chat-window");
-    if (chatContainer) {
-      window.scrollTo(0, chatContainer.scrollHeight);
+    const container = document.getElementById("chat-window");
+    if (container) {
+      container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
     }
   }, []);
 
   useEffect(() => {
     scrollBottom();
   }, [messages, scrollBottom]);
+
+  const buildReporitoriesToMessages = useCallback(
+    (repositories: RepositoryEntity[]) => {
+      const repositoriesMessages = repositories?.map((repository) => {
+        debugger;
+        return new MessageEntity({
+          id: uuid(),
+          role: "assistant",
+          content: repository,
+        });
+      });
+      return repositoriesMessages;
+    },
+    []
+  );
 
   const handleSendMessage = useCallback(async () => {
     try {
@@ -84,11 +92,21 @@ export function useChat(): ChatHook {
         content: input,
       });
       setMessages((prev) => [...prev, userMessage]);
-      scrollBottom();
+
       setInput("");
-      callLoading();
-      const suggestions = await openAIRepo.getSuggestion(input);
-      showBounceMessages(suggestions);
+
+      await callLoading();
+      const repositories = await gitHubRepo.getUserRepos(input);
+      debugger;
+      const messages = buildReporitoriesToMessages(repositories);
+      showBounceMessages(messages);
+      const assistantMessage = new MessageEntity({
+        id: uuid(),
+        role: "system",
+        content:
+          "Gostaria de explorar outro usuário? Se sim, por favor, insira o nome de usuário do GitHub 🤖.",
+      });
+      showBounceMessages([assistantMessage]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -97,26 +115,19 @@ export function useChat(): ChatHook {
   }, [callLoading, input, offLoadingText, showBounceMessages, scrollBottom]);
 
   const handleHelp = useCallback(() => {
-    setInput(
-      "Explore as tendências atuais em gerenciamento de estado funcional no React."
-    );
+    setInput("LGustavoBarbosa");
   }, []);
 
-  const boot = useCallback(async () => {
+  const bootGh = useCallback(async () => {
     try {
-      const input = bootChatPrompt;
+      const input =
+        "Eu sou o seu assistente buscador de repositórios no GitHub! Para começar, por favor, insira o nome de usuário do GitHub que você gostaria de pesquisar 🤖.";
       const assistantThinking = new MessageEntity({
         id: uuid(),
         role: "system",
-        content:
-          "Aqui estão algumas tendências de tecnologias front-end mais populares no GitHub no último semestre.",
+        content: input,
       });
       setMessages((prev) => [...prev, assistantThinking]);
-      callLoading();
-      const suggestions: SuggestionsEntity[] = await openAIRepo.getSuggestion(
-        input
-      );
-      showBounceMessages(suggestions);
     } catch (error) {
       console.error(error);
     } finally {
@@ -125,7 +136,7 @@ export function useChat(): ChatHook {
   }, [callLoading, offLoadingText, showBounceMessages]);
 
   useEffect(() => {
-    boot();
+    bootGh();
   }, []);
 
   return {

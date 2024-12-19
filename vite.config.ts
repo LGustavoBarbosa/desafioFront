@@ -13,6 +13,7 @@ export default defineConfig({
       domain: path.resolve(__dirname, "src/domain"),
       providers: path.resolve(__dirname, "src/providers"),
       views: path.resolve(__dirname, "src/views"),
+      errors: path.resolve(__dirname, "src/errors"),
     },
   },
 });
