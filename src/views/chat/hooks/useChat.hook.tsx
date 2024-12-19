@@ -38,21 +38,22 @@ export function useChat(): ChatHook {
         }
         return prev + ".";
       });
-      const assistantThinking = new MessageEntity({
-        id: uuid(),
-        role: "system.loading",
-        content: loadingText,
-        loadingText: loadingText,
-      });
-      setMessages((prev) => [...prev, assistantThinking]);
     }, 600);
+
+    const assistantThinking = new MessageEntity({
+      id: uuid(),
+      role: "system.loading",
+      content: loadingText,
+      loadingText: loadingText,
+    });
+    setMessages((prev) => [...prev, assistantThinking]);
+    return loadingText;
   }, []);
 
   const showBounceMessages = useCallback((messages: MessageEntity[]) => {
     for (const message of messages) {
       setTimeout(() => {
         setMessages((prev) => [...prev, message]);
-        scrollBottom();
       }, 600);
     }
   }, []);
@@ -99,7 +100,18 @@ export function useChat(): ChatHook {
       const repositories = await gitHubRepo.getUserRepos(input);
       debugger;
       const messages = buildReporitoriesToMessages(repositories);
-      showBounceMessages(messages);
+      debugger;
+      if (messages.length === 0) {
+        const assistantMessage = new MessageEntity({
+          id: uuid(),
+          role: "system",
+          content:
+            "Não foram encontrados repositórios para o usuário informado. Por favor, insira outro nome de usuário do GitHub 🤖.",
+        });
+        showBounceMessages([assistantMessage]);
+      } else {
+        showBounceMessages(messages);
+      }
       const assistantMessage = new MessageEntity({
         id: uuid(),
         role: "system",
