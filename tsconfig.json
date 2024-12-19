@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "esnext",
+    "module": "ESNext",
     "lib": ["ES2020", "DOM"],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
-    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
@@ -21,6 +21,7 @@
     "rootDir": "./src",
     "noEmit": false
   },
+
   "include": ["src", "theme.ts"],
   "exclude": ["node_modules", "dist"]
 }

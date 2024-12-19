@@ -3,7 +3,6 @@
   "version": "1.0.1",
   "type": "module",
   "scripts": {
-    "install": "npm install --legacy-peer-deps --force",
     "dev": "vite",
     "build": "vite build",
     "deploy-prod-firebase": "vite build && firebase deploy",
@@ -17,23 +16,23 @@
     "@fontsource/cabin": "^5.1.0",
     "@fontsource/inter": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
-    "@mui/icons-material": "^5.14.0",
-    "@mui/material": "^5.14.0",
+    "@mui/icons-material": "^5.16.12",
+    "@mui/material": "^5.16.12",
+    "@testing-library/react-hooks": "^7.0.2",
     "axios": "^1.5.0",
-    "framer-motion": "^10.12.16",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "framer-motion": "^10.18.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
+    "@eslint/js": "^9.17.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^29.5.14",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.10.2",
-    "@types/react": "^18.3.10",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.2",
     "eslint": "^8.57.1",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -43,6 +42,6 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3",
-    "vite": "^5.4.8"
+    "vite": "^5.4.11"
   }
 }
